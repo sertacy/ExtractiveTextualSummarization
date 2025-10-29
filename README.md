@@ -1,66 +1,50 @@
-# Extractive Textual Summarization
+# Extractive Email Conversations Summarization
 
-Overview:
+## Overview
 
-The goal: Selecting important 
-sentences in Email conversations
-I use the Naive Bayes Machine 
-learning algorithm  
-Potential use cases:  
-  • automatic summarizing  
-  • highlighting sentences for faster 
-    overview in a user interface  
+This project implements extractive summarization for email conversations using a Naive Bayes  
+machine learning algorithm. The system selects the most important sentences from email threads  
+to create concise summaries.
 
-_______________________________
+### Potential Use Cases
+- Automatic email summarization
+- Intelligent sentence highlighting for faster content scanning
+- Enhanced user interface for email clients
 
+## Data Resources
 
-Data ressources:
+- **BC3 Email Corpus**: 40 email threads containing 3,222 sentences
+- **WordNet**: A lexical database used for compiling feature word lists
 
-BC3 Email Corpus: 
-40 Email threads (3222 sentences)  
-wordnet:  
-a lexical ressource we used for compiling wordlists
+## Implementation
 
-_______________________________
+The project consists of four main modules:
 
+- `prepare_corpus.py` - Converts the corpus into a Python data structure
+- `features.py` - Collection of feature extraction functions
+- `extract_features.py` - Generates complete feature sets for model training
+- `evaluate.py` - Splits feature sets and evaluates classifier performance
 
-Implementation:
+Intermediate results are stored as cPickle files for efficient processing.
 
-prepare_corpus.py  
-    -convert corpus into python datastructure  
-features.py  
-    -collection of feature functions  
-extract_features.py  
-    -create full featureset for training  
-evaluate.py  
-    -split featureset and compare performance of parts  
+## Experiments & Results
 
-Intermediate results are stored in cPickle files
+The classifier's performance was evaluated using F1-scores across different feature combinations.   
+K-fold cross-validation was employed to ensure reliable and reproducible results.
 
-_______________________________
+![Performance Statistics](/img/stats.jpg?raw=true)
 
+## Conclusion
 
-Experiments & Results:
+Key findings from this research:
 
-Comparing F1-scores after training the classifier
-with different combinations of features.  
-Multiple tests on same data for more reliable
-results (k-fold evaluation)
+- **Feature combination is critical** - Individual features often perform poorly in isolation,
+  while combinations yield significantly better results
+- **Computational complexity** - Testing all possible feature combinations for *n* features
+  requires O(2^n) evaluations in the best case, making exhaustive search impractical
+- **Optimization strategy** - Separating feature extraction from evaluation substantially
+  reduces computational time and enables more efficient experimentation
 
-![features_chart](/img/stats.jpg?raw=true "Features")
+## Future Work
 
-_______________________________
-
-
-Conclusion:
-
-Combination of features is crucial.
-Single features may have bad performance.  
-Testing all possible feature combinations is
-difficult, as the time needed for n features is
-2^n in the best case.  
-Splitting feature extraction and evaluation
-speeds this up.
-
-
-
+Potential areas for improvement include exploring more sophisticated feature selection algorithms and testing with larger email corpora.
